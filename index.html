@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
+    <div id="bg-overlay"></div>
     <!-- =========== 시작 화면 =========== -->
     <div id="start-screen" class="screen">
         <div class="ambient-circles">
@@ -23,10 +23,12 @@
             <h1 class="start-title">카페 바리스타 훈련</h1>
             <p class="start-sub">5단계 과제를 순서대로 완료하며<br>바리스타 업무를 익혀보세요!</p>
             <div class="start-stages" id="start-stages"></div>
-            <button class="btn-start" id="btn-start">
-                <span>훈련 시작하기</span>
-                <span class="btn-arrow">→</span>
-            </button>
+            <div class="swipe-container" id="swipe-container">
+                <div class="swipe-track" id="swipe-track">
+                    <span class="swipe-text">우측으로 밀어서 훈련 시작하기</span>
+                    <div class="swipe-thumb" id="swipe-thumb">→</div>
+                </div>
+            </div>
         </div>
     </div>
 

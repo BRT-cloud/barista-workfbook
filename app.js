@@ -63,12 +63,60 @@ const MENU_ITEMS = [
   { id: 'choco', icon: '🍫', name: '초코라떼', price: 5000 }
 ];
 
+const RECIPES = {
+  americano: [
+    { id: 'cup', icon: '🥤', name: '아이스 컵 준비', desc: '얼음이 담긴 컵 준비' },
+    { id: 'water', icon: '💧', name: '시원한 물 추가', desc: '정수 추가' },
+    { id: 'espresso', icon: '☕', name: '에스프레소 추출', desc: '2샷 추출' },
+    { id: 'finish', icon: '✨', name: '완성', desc: '뚜껑 덮고 완성' }
+  ],
+  latte: [
+    { id: 'cup', icon: '🥤', name: '아이스 컵 준비', desc: '얼음이 담긴 컵 준비' },
+    { id: 'milk', icon: '🥛', name: '우유 추가', desc: '차가운 우유 붓기' },
+    { id: 'espresso', icon: '☕', name: '에스프레소 추출', desc: '2샷 추출' },
+    { id: 'finish', icon: '✨', name: '완성', desc: '뚜껑 덮고 완성' }
+  ],
+  cappuccino: [
+    { id: 'cup', icon: '☕', name: '따뜻한 잔 준비', desc: '머그잔 준비' },
+    { id: 'espresso', icon: '☕', name: '에스프레소 추출', desc: '1샷 추출' },
+    { id: 'steamed_milk', icon: '🥛', name: '스팀밀크', desc: '스팀밀크 붓기' },
+    { id: 'foam', icon: '☁️', name: '우유 거품', desc: '풍성한 거품 올리기' },
+    { id: 'finish', icon: '✨', name: '완성', desc: '시나몬 파우더 뿌려 완성' }
+  ],
+  vanilla: [
+    { id: 'cup', icon: '🥤', name: '아이스 컵 준비', desc: '얼음이 담긴 컵 준비' },
+    { id: 'syrup', icon: '🍯', name: '바닐라 시럽', desc: '바닐라 시럽 펌핑' },
+    { id: 'milk', icon: '🥛', name: '우유 추가', desc: '차가운 우유 붓기' },
+    { id: 'espresso', icon: '☕', name: '에스프레소 추출', desc: '2샷 추출' },
+    { id: 'finish', icon: '✨', name: '완성', desc: '뚜껑 덮고 완성' }
+  ],
+  caramel: [
+    { id: 'cup', icon: '🥤', name: '아이스 컵 준비', desc: '얼음이 담긴 컵 준비' },
+    { id: 'syrup', icon: '🍯', name: '바닐라 시럽', desc: '바닐라 시럽 펌핑' },
+    { id: 'milk', icon: '🥛', name: '우유 추가', desc: '차가운 우유 붓기' },
+    { id: 'espresso', icon: '☕', name: '에스프레소 추출', desc: '2샷 추출' },
+    { id: 'drizzle', icon: '🍯', name: '카라멜 드리즐', desc: '카라멜 소스 뿌리기' },
+    { id: 'finish', icon: '✨', name: '완성', desc: '뚜껑 덮고 완성' }
+  ],
+  choco: [
+    { id: 'cup', icon: '☕', name: '따뜻한 잔 준비', desc: '머그잔 준비' },
+    { id: 'choco', icon: '🍫', name: '초코 소스', desc: '초코 소스 펌핑' },
+    { id: 'steamed_milk', icon: '🥛', name: '스팀밀크', desc: '스팀밀크 붓기' },
+    { id: 'finish', icon: '✨', name: '완성', desc: '잘 저어서 완성' }
+  ]
+};
+
 const CUSTOMERS = [
-  { emoji: '👩', name: '김미영' },
-  { emoji: '👨', name: '이준호' },
-  { emoji: '👧', name: '박서연' },
-  { emoji: '🧑', name: '최민수' },
-  { emoji: '👩‍🦰', name: '정하늘' }
+  { img: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80' },
+  { img: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=200&q=80' },
+  { img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80' },
+  { img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80' },
+  { img: 'https://images.unsplash.com/photo-1524504388218-f06951fe24ce?auto=format&fit=crop&w=200&q=80' },
+  { img: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=200&q=80' },
+  { img: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80' },
+  { img: 'https://images.unsplash.com/photo-1506863530036-1ef8d16f8595?auto=format&fit=crop&w=200&q=80' },
+  { img: 'https://images.unsplash.com/photo-1554151228-14d9def656e4?auto=format&fit=crop&w=200&q=80' },
+  { img: 'https://images.unsplash.com/photo-1488426862026-3ee34a7d66fc?auto=format&fit=crop&w=200&q=80' }
 ];
 
 // ── 상태 ──
@@ -150,12 +198,68 @@ function init() {
 
 // ── 글로벌 이벤트 ──
 function bindGlobalEvents() {
-  $('btn-start').addEventListener('click', () => showScreen('select'));
   $('btn-back-select').addEventListener('click', () => showScreen('start'));
   $('btn-back-game').addEventListener('click', () => showScreen('select'));
   $('btn-modal-next').addEventListener('click', onModalNext);
   $('btn-retry').addEventListener('click', onRetry);
   $('btn-final-close').addEventListener('click', () => showScreen('select'));
+
+  // Swipe to Start logic
+  const thumb = $('swipe-thumb');
+  const track = $('swipe-track');
+  const container = $('swipe-container');
+  if (thumb && track && container) {
+    let isDragging = false;
+    let startX = 0;
+    
+    function getEventX(e) { return e.type.includes('mouse') ? e.pageX : e.touches[0].pageX; }
+    
+    function onDragStart(e) {
+      if (track.classList.contains('success')) return;
+      isDragging = true;
+      startX = getEventX(e) - thumb.offsetLeft;
+      thumb.style.transition = 'none';
+      if(e.type === 'touchstart') e.preventDefault();
+    }
+    
+    function onDragMove(e) {
+      if (!isDragging) return;
+      e.preventDefault();
+      let currentX = getEventX(e) - startX;
+      const maxPosX = container.offsetWidth - thumb.offsetWidth - 8;
+      currentX = Math.max(4, Math.min(currentX, maxPosX));
+      thumb.style.left = currentX + 'px';
+      
+      if (currentX >= maxPosX - 2) {
+        isDragging = false;
+        track.classList.add('success');
+        thumb.innerHTML = '✓';
+        setTimeout(() => {
+          showScreen('select');
+          // Reset slider
+          setTimeout(() => {
+            track.classList.remove('success');
+            thumb.style.left = '4px';
+            thumb.innerHTML = '→';
+          }, 300);
+        }, 300);
+      }
+    }
+    
+    function onDragEnd() {
+      if (!isDragging) return;
+      isDragging = false;
+      thumb.style.transition = 'left 0.3s ease';
+      thumb.style.left = '4px';
+    }
+
+    thumb.addEventListener('mousedown', onDragStart);
+    thumb.addEventListener('touchstart', onDragStart, {passive: false});
+    window.addEventListener('mousemove', onDragMove, {passive: false});
+    window.addEventListener('touchmove', onDragMove, {passive: false});
+    window.addEventListener('mouseup', onDragEnd);
+    window.addEventListener('touchend', onDragEnd);
+  }
 }
 
 // ── 화면 전환 ──
@@ -236,7 +340,33 @@ function enterStage(stageId) {
     state.completedTasks[stageId] = new Set();
   }
 
+  // 주문 정보 생성 (2단계 이후용)
+  if (!state.currentOrder) {
+    const customer = CUSTOMERS[Math.floor(Math.random() * CUSTOMERS.length)];
+    const menuItem = MENU_ITEMS[Math.floor(Math.random() * MENU_ITEMS.length)];
+    const paymentMethod = Math.random() > 0.5 ? 'card' : 'cash';
+    const paidAmount = Math.ceil(menuItem.price / 5000) * 5000;
+    state.currentOrder = { customer, menuItem, paymentMethod, paidAmount };
+  }
+
   const stage = STAGES.find(s => s.id === stageId);
+  if (stageId === 3 && state.currentOrder) {
+    if (state.currentOrder.paymentMethod === 'cash') {
+      stage.tasks = [
+        { id: 'total', icon: '🧾', name: '금액 확인', desc: '주문 금액 확인' },
+        { id: 'payment', icon: '💵', name: '결제 받기', desc: '현금 받기' },
+        { id: 'change', icon: '💰', name: '거스름돈', desc: '거스름돈 건네주기' }
+      ];
+    } else {
+      stage.tasks = [
+        { id: 'total', icon: '🧾', name: '금액 확인', desc: '주문 금액 확인' },
+        { id: 'payment', icon: '💳', name: '결제 받기', desc: '카드 받아 결제하기' }
+      ];
+    }
+  } else if (stageId === 4 && state.currentOrder) {
+    stage.tasks = RECIPES[state.currentOrder.menuItem.id];
+  }
+
   showScreen('game');
 
   // HUD 업데이트
@@ -244,13 +374,6 @@ function enterStage(stageId) {
   $('hud-name').textContent = `${stageId}단계: ${stage.name}`;
   $('hud-score').textContent = `⭐ ${state.score}`;
   updateHudProgress(stageId);
-
-  // 주문 정보 생성 (2단계 이후용)
-  if (!state.currentOrder) {
-    const customer = CUSTOMERS[Math.floor(Math.random() * CUSTOMERS.length)];
-    const menuItem = MENU_ITEMS[Math.floor(Math.random() * MENU_ITEMS.length)];
-    state.currentOrder = { customer, menuItem };
-  }
 
   // 단계별 렌더
   renderStageContent(stageId);
@@ -433,14 +556,14 @@ function renderStageOpen(scene, stage, doneTasks) {
 function renderStageOrder(scene, stage, doneTasks) {
   const { customer, menuItem } = state.currentOrder;
   const baristaGreet = '어서오세요! 무엇을 도와드릴까요?';
-  const customerOrder = `${menuItem.name} 한 잔 주세요!`;
+  const customerOrder = `${menuItem.name}주세요.`;
   const baristaConfirm = `${menuItem.name} 한 잔, ${menuItem.price.toLocaleString()}원입니다.`;
 
   if (!doneTasks.has('greet')) {
     scene.innerHTML = `
       <div class="customer-area slide-up">
-        <div class="customer-emoji">${customer.emoji}</div>
-        <div class="scene-title">${customer.name} 손님이 오셨습니다</div>
+        <img src="${customer.img}" class="customer-photo" alt="손님">
+        <div class="scene-title">손님이 오셨습니다</div>
         <div class="scene-sub">손님에게 인사해주세요</div>
       </div>
       ${practiceHTML(baristaGreet)}
@@ -454,7 +577,7 @@ function renderStageOrder(scene, stage, doneTasks) {
   } else if (!doneTasks.has('order')) {
     scene.innerHTML = `
       <div class="customer-area slide-up">
-        <div class="customer-emoji">${customer.emoji}</div>
+        <img src="${customer.img}" class="customer-photo" alt="손님">
         <div class="speech-bubble">"${customerOrder}"</div>
         <div class="customer-voice-tag">🔊 손님 음성 자동 재생</div>
       </div>
@@ -487,7 +610,7 @@ function renderStageOrder(scene, stage, doneTasks) {
     const customerReply = '네, 맞아요!';
     scene.innerHTML = `
       <div class="customer-area slide-up">
-        <div class="customer-emoji">${customer.emoji}</div>
+        <img src="${customer.img}" class="customer-photo" alt="손님">
         <div class="scene-title">주문 확인</div>
         <div class="speech-bubble" style="margin-top:12px">${menuItem.icon} ${menuItem.name} — ${menuItem.price.toLocaleString()}원</div>
       </div>
@@ -497,7 +620,6 @@ function renderStageOrder(scene, stage, doneTasks) {
     bindPractice(scene, baristaConfirm);
     $('btn-confirm-order').addEventListener('click', () => {
       speak(baristaConfirm);
-      autoSpeak(customerReply, 2000);
       completeTask(2, 'confirm');
     });
   }
@@ -507,9 +629,8 @@ function renderStageOrder(scene, stage, doneTasks) {
 //  3단계: 계산하기
 // ============================================================
 function renderStagePayment(scene, stage, doneTasks) {
-  const { customer, menuItem } = state.currentOrder;
+  const { customer, menuItem, paymentMethod, paidAmount } = state.currentOrder;
   const baristaTotal = `총 ${menuItem.price.toLocaleString()}원입니다.`;
-  const baristaPayDone = '결제 완료되었습니다. 감사합니다!';
 
   if (!doneTasks.has('total')) {
     scene.innerHTML = `
@@ -529,10 +650,11 @@ function renderStagePayment(scene, stage, doneTasks) {
       completeTask(3, 'total');
     });
   } else if (!doneTasks.has('payment')) {
-    const customerPay = '카드로 할게요!';
+    const isCard = paymentMethod === 'card';
+    const customerPay = isCard ? '카드로 할게요!' : `현금으로 할게요! (${paidAmount.toLocaleString()}원)`;
     scene.innerHTML = `
       <div class="customer-area slide-up" style="padding:16px">
-        <div class="customer-emoji" style="font-size:40px">${customer.emoji}</div>
+        <img src="${customer.img}" class="customer-photo" alt="손님">
         <div class="speech-bubble">"${customerPay}"</div>
         <div class="customer-voice-tag">🔊 손님 음성 자동 재생</div>
       </div>
@@ -551,10 +673,41 @@ function renderStagePayment(scene, stage, doneTasks) {
     bindPractice(scene, '네, 결제 도와드리겠습니다.');
     scene.querySelectorAll('.pay-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        speak(baristaPayDone);
-        showToast('💳', '결제가 완료되었습니다!', 'success');
-        completeTask(3, 'payment');
+        const clickedPay = btn.dataset.pay;
+        if (clickedPay === paymentMethod) {
+          if (isCard) {
+            speak('결제 완료되었습니다. 감사합니다!');
+            showToast('💳', '결제가 완료되었습니다!', 'success');
+          } else {
+            showToast('💵', '현금을 받았습니다.', 'success');
+          }
+          completeTask(3, 'payment');
+        } else {
+          btn.classList.add('wrong');
+          showToast('❌', '결제 수단을 확인해주세요!', 'error');
+          setTimeout(() => btn.classList.remove('wrong'), 600);
+        }
       });
+    });
+  } else if (!doneTasks.has('change')) {
+    const changeAmount = paidAmount - menuItem.price;
+    scene.innerHTML = `
+      <div class="pos-terminal slide-up">
+        <div class="scene-sub" style="color:var(--text-dim);margin-bottom:12px">💰 거스름돈 계산</div>
+        <div class="pos-screen" style="background:#0f172a">
+          <div class="pos-item" style="color:#94a3b8"><span>받은 금액</span><span>${paidAmount.toLocaleString()}원</span></div>
+          <div class="pos-item" style="color:#94a3b8"><span>결제 금액</span><span>-${menuItem.price.toLocaleString()}원</span></div>
+          <div class="pos-total" style="color:#38bdf8;border-top-color:rgba(56,189,248,.3)"><span>거스름돈</span><span>${changeAmount.toLocaleString()}원</span></div>
+        </div>
+        ${practiceHTML(`거스름돈 ${changeAmount.toLocaleString()}원입니다.`)}
+        <button class="btn-serve pop-in" style="margin-top:16px" id="btn-give-change">💵 "거스름돈 건네주기"</button>
+      </div>
+    `;
+    bindPractice(scene, `거스름돈 ${changeAmount.toLocaleString()}원입니다.`);
+    $('btn-give-change').addEventListener('click', () => {
+      speak(`거스름돈 ${changeAmount.toLocaleString()}원입니다. 감사합니다!`);
+      showToast('💰', '거스름돈을 건네주었습니다.', 'success');
+      completeTask(3, 'change');
     });
   }
 }
@@ -635,8 +788,8 @@ function renderStageServe(scene, stage, doneTasks) {
     scene.innerHTML = `
       <div class="serve-area slide-up">
         <div class="serve-drink">${menuItem.icon}</div>
-        <div class="customer-emoji" style="font-size:48px;margin-bottom:12px">${customer.emoji}</div>
-        <div class="scene-sub" style="color:var(--text-dim);margin-bottom:16px">${customer.name} 손님에게 전달해주세요</div>
+        <img src="${customer.img}" class="customer-photo" alt="손님">
+        <div class="scene-sub" style="color:var(--text-dim);margin-bottom:16px">손님에게 전달해주세요</div>
       </div>
       ${practiceHTML(baristaServe)}
       <button class="btn-serve pop-in" id="btn-serve-drink">🫗 서빙하기</button>
@@ -652,7 +805,7 @@ function renderStageServe(scene, stage, doneTasks) {
       <div class="serve-area slide-up">
         <div class="customer-reaction">
           <div class="reaction-emoji">😊</div>
-          <div class="reaction-text">${customer.name}: "${customerThanks}"</div>
+          <div class="reaction-text">손님: "${customerThanks}"</div>
           <div class="customer-voice-tag">🔊 손님 음성 자동 재생</div>
         </div>
       </div>
@@ -669,8 +822,8 @@ function renderStageServe(scene, stage, doneTasks) {
     const customerBye = '네, 또 올게요! 맛있었어요!';
     scene.innerHTML = `
       <div class="serve-area slide-up">
-        <div class="customer-emoji" style="font-size:60px;margin-bottom:12px">${customer.emoji}</div>
-        <div class="scene-title">${customer.name} 손님에게 인사해주세요</div>
+        <img src="${customer.img}" class="customer-photo" alt="손님">
+        <div class="scene-title">손님에게 인사해주세요</div>
       </div>
       ${practiceHTML(baristaBye)}
       <button class="btn-serve pop-in" style="margin-top:16px" id="btn-goodbye">👋 인사하고 진행하기</button>
