@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카페 바리스타 훈련 시뮬레이터</title>
+    <meta name="description" content="5단계 과제를 통해 바리스타 업무를 순서대로 실습하는 인터랙티브 시뮬레이터">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- =========== 시작 화면 =========== -->
+    <div id="start-screen" class="screen">
+        <div class="ambient-circles">
+            <div class="circle c1"></div>
+            <div class="circle c2"></div>
+            <div class="circle c3"></div>
+        </div>
+        <div class="start-content">
+            <div class="start-logo" id="start-logo">☕</div>
+            <h1 class="start-title">카페 바리스타 훈련</h1>
+            <p class="start-sub">5단계 과제를 순서대로 완료하며<br>바리스타 업무를 익혀보세요!</p>
+            <div class="start-stages" id="start-stages"></div>
+            <button class="btn-start" id="btn-start">
+                <span>훈련 시작하기</span>
+                <span class="btn-arrow">→</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- =========== 과제 선택 화면 =========== -->
+    <div id="select-screen" class="screen hidden">
+        <div class="select-header">
+            <button class="btn-back" id="btn-back-select">← 처음으로</button>
+            <div class="select-progress-wrap">
+                <span class="select-progress-label" id="select-progress-label">0 / 5 완료</span>
+                <div class="select-progress-bar">
+                    <div class="select-progress-fill" id="select-progress-fill"></div>
+                </div>
+            </div>
+        </div>
+        <h2 class="select-title">📋 과제 목록</h2>
+        <div class="stage-list" id="stage-list"></div>
+    </div>
+
+    <!-- =========== 게임 화면 =========== -->
+    <div id="game-screen" class="screen hidden">
+        <!-- HUD -->
+        <div id="hud">
+            <div class="hud-top">
+                <button class="hud-back" id="btn-back-game">←</button>
+                <div class="hud-stage-info">
+                    <span class="hud-stage-icon" id="hud-icon"></span>
+                    <span class="hud-stage-name" id="hud-name"></span>
+                </div>
+                <div class="hud-score" id="hud-score">⭐ 0</div>
+            </div>
+            <div class="hud-progress-bar">
+                <div class="hud-progress-fill" id="hud-progress-fill"></div>
+            </div>
+        </div>
+
+        <!-- 카페 씬 (동적 콘텐츠) -->
+        <div id="cafe-scene"></div>
+
+        <!-- 가이드 패널 -->
+        <div id="guide-panel">
+            <div class="guide-bubble">
+                <span class="guide-icon" id="guide-icon">💡</span>
+                <p class="guide-text" id="guide-text">안내 메시지</p>
+            </div>
+        </div>
+
+        <!-- 과제 체크리스트 -->
+        <div id="task-checklist"></div>
+    </div>
+
+    <!-- =========== 단계 완료 모달 =========== -->
+    <div id="stage-modal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-emoji" id="modal-emoji">🎉</div>
+            <h2 class="modal-title" id="modal-title">단계 완료!</h2>
+            <p class="modal-sub" id="modal-sub">잘 했어요!</p>
+            <div class="modal-stats" id="modal-stats"></div>
+            <button class="btn-modal-next" id="btn-modal-next">다음 단계로 →</button>
+        </div>
+    </div>
+
+    <!-- =========== 최종 완료 모달 =========== -->
+    <div id="final-modal" class="modal-overlay hidden">
+        <div class="modal-card final-card">
+            <div class="modal-emoji">🏆</div>
+            <h2 class="modal-title">훈련 완료!</h2>
+            <p class="modal-sub">모든 과제를 성공적으로 마쳤습니다!</p>
+            <div class="modal-stats" id="final-stats"></div>
+            <div class="final-btns">
+                <button class="btn-modal-retry" id="btn-retry">처음부터 다시</button>
+                <button class="btn-modal-next" id="btn-final-close">완료</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========== 토스트 알림 =========== -->
+    <div id="toast" class="toast hidden">
+        <span class="toast-icon" id="toast-icon">✅</span>
+        <span class="toast-msg" id="toast-msg">완료!</span>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
